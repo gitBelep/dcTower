@@ -19,16 +19,34 @@ public class ElevatorPool {
         }
     }
 
-    public void findNearestFreeElevatorOrSchedule(Request request){
+    public Elevator getFreeElevatorOrNull(){
+        Elevator nearestFreeElevator = null;
+        int personsStartFloor = requests.peek().getCurrentFloor();
+        for(Elevator actual : elevators){
+            if(actual.isFree()){
+                if(nearestFreeElevator == null){
+                    nearestFreeElevator = actual;
+                }
+                if(Math.abs(actual.getCurrentPos() - personsStartFloor) < Math.abs(nearestFreeElevator.getCurrentPos() - personsStartFloor)){
+                    nearestFreeElevator = actual;
+                }
+            }
+        }
+        return nearestFreeElevator;
+    }
 
+    public void liftPerson(Elevator elevator){
+        System.out.println("ElevatorsPos: "+ elevator.getCurrentPos() +", id: "+ elevator.getId()
+                + ", PersosnPos:"+ requests.peek().getCurrentFloor());
+        elevator.travel(requests.poll());
     }
 
     public void addRequest(Request request){
         requests.offer(request);
     }
 
-    public Request getRequest(){
-        return requests.poll();
+    public Queue<Request> getRequests() {
+        return new LinkedList<>(requests);
     }
 
 }
