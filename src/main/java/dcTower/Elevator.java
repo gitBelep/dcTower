@@ -35,13 +35,13 @@ public class Elevator {
         this.busyTill = busyTill;
     }
 
-    public void travel(Request request){
+    public void travel(Request request) {
         int floorsEmpty = Math.abs(this.getCurrentPos() - request.getCurrentFloor());
         int floorsWithPerson = Math.abs(request.getCurrentFloor() - request.getDestinationFloor());
         int floors = floorsEmpty + floorsWithPerson;
-        setBusyTill(LocalDateTime.now().plusSeconds(floors * (TIME_PER_FLOOR/1000)));
+        setBusyTill(LocalDateTime.now().plusSeconds(floors * (TIME_PER_FLOOR / 1000)));
         setCurrentPos(request.getDestinationFloor());
-        System.out.println(floorsEmpty +"+"+ floorsWithPerson+" floors "+ LocalDateTime.now().getSecond() +"~"+busyTill.getSecond() +"sec ");
+        System.out.println(floorsEmpty + "+" + floorsWithPerson + " floors " + LocalDateTime.now().getSecond() + "~" + busyTill.getSecond() + "sec ");
     }
 
 }

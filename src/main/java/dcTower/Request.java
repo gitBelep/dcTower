@@ -9,7 +9,7 @@ public class Request {
         checkData(currentFloor, destinationFloor);
         this.currentFloor = currentFloor;
         this.destinationFloor = destinationFloor;
-        if (destinationFloor == 0){
+        if (destinationFloor == 0) {
             this.direction = Direction.DOWN;
         } else {
             this.direction = Direction.UP;
@@ -28,12 +28,15 @@ public class Request {
         return direction;
     }
 
-    private void checkData(int currentFloor, int destinationFloor){
-        if(currentFloor < 0 || 55 < currentFloor){
-            throw new IllegalArgumentException("Check elevator card scanner");
+    private void checkData(int currentFloor, int destinationFloor) {
+        if (currentFloor < 0 || 55 < currentFloor) {
+            throw new ScanningException("Check card scanner");
         }
-        if(destinationFloor < 0 || 55 < destinationFloor){
-            throw new IllegalArgumentException("Check ID card");
+        if (destinationFloor < 0 || 55 < destinationFloor) {
+            throw new ScanningException("Check ID card");
+        }
+        if (destinationFloor != 0 && currentFloor != 0) {
+            throw new ScanningException("Invalid direction!");
         }
     }
 
