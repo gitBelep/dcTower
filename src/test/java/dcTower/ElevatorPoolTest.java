@@ -11,7 +11,7 @@ class ElevatorPoolTest {
     @BeforeEach
     void init() throws InterruptedException {
         pool = new ElevatorPool();
-        Thread.sleep(1);
+        Thread.sleep(1);    //other way "Elevator is null" because seems to be busy
     }
 
     @Test

@@ -16,6 +16,7 @@ public class Request {
         }
     }
 
+
     public int getCurrentFloor() {
         return currentFloor;
     }

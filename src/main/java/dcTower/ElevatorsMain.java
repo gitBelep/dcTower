@@ -14,14 +14,15 @@ public class ElevatorsMain {
         while (LocalTime.now().isBefore(LocalTime.of(22,01))) {
             if (!pool.getRequests().isEmpty()) {
                 Elevator nearestElevator = pool.getNearestFreeElevatorOrNull();
-                if (nearestElevator != null) {
-                    pool.liftPerson(nearestElevator);
-                } else {
-                    System.out.println("sleep " + pool.getRequests().size() + "requests are waiting");
+                if (nearestElevator == null) {
                     Thread.sleep(Elevator.TIME_PER_FLOOR);
+                } else {
+                    pool.liftPerson(nearestElevator);
                 }
+            } else {
+                Thread.sleep(Elevator.TIME_PER_FLOOR * 2);
             }
-            if (i < requestList.size()) {
+            if (i < requestList.size()) {      //Requests are coming & they have to be stored
                 pool.addRequest(requestList.get(i));
                 i++;
             }

@@ -3,7 +3,7 @@ package dcTower;
 import java.time.LocalDateTime;
 
 public class Elevator {
-    final static int TIME_PER_FLOOR = 1000; //msec
+    static final int TIME_PER_FLOOR = 1000;
     private final int id;
     private int currentPos;
     private LocalDateTime busyTill;
@@ -41,7 +41,6 @@ public class Elevator {
         int floors = floorsEmpty + floorsWithPerson;
         setBusyTill(LocalDateTime.now().plusSeconds(floors * (TIME_PER_FLOOR / 1000)));
         setCurrentPos(request.getDestinationFloor());
-        System.out.println(floorsEmpty + "+" + floorsWithPerson + " floors " + LocalDateTime.now().getSecond() + "~" + busyTill.getSecond() + "sec ");
     }
 
 }
